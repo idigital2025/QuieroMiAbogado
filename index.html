@@ -522,7 +522,9 @@
             transition: transform 0.2s;
         }
         .faq-accordion details[open] summary::after { transform: rotate(45deg); }
-        .faq-accordion div { padding: 10px 0 0 10px; }
+        .faq-accordion div { 
+            padding: 10px 0 0 0; /* Ajuste para mobile */
+        }
 
         /* --- Final CTA Section --- */
         .final-cta-section {
@@ -712,6 +714,29 @@
         }
 
         @media (max-width: 768px) {
+            .hero-content {
+                padding-top: 100px; /* Más espacio superior en mobile */
+                padding-bottom: 30px; /* Espacio inferior en mobile */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                min-height: calc(80vh - 70px); /* Ajustar altura para centrado */
+            }
+            .hero-buttons { margin-top: auto; } /* Empuja los botones hacia abajo */
+
+            .team-card {
+                flex-direction: column; /* Cambia a layout vertical */
+                align-items: center; /* Centra todo */
+                text-align: center;
+            }
+            .team-info ul {
+                padding-top: 10px;
+                text-align: left; /* Alinear texto de lista a la izquierda */
+            }
+            .faq-accordion div {
+                padding: 10px 0 0 0; /* Asegurar que no haya padding izquierdo */
+            }
+
             .hero { min-height: 80vh; }
             .hero-buttons { flex-direction: column; align-items: center; }
             .services-grid { grid-template-columns: 1fr; }
@@ -1201,3 +1226,4 @@
 
 </body>
 </html>
+
