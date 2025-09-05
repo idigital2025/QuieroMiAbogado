@@ -170,6 +170,8 @@
 
         .nav-menu .dropdown {
             position: relative;
+            padding-bottom: 15px; /* Espacio para mantener hover */
+            margin-bottom: -15px; /* Compensar padding */
         }
         .nav-menu .dropdown .arrow {
             width: 10px;
@@ -185,20 +187,21 @@
         .nav-menu .dropdown-content {
             display: none;
             position: absolute;
+            top: 100%; /* Alinear con el fondo del padding */
+            left: -15px;
             background-color: var(--color-white);
             min-width: 220px;
             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1);
             border-radius: 10px;
             z-index: 1;
             padding: 10px 0;
-            margin-top: 10px;
         }
         .nav-menu .dropdown:hover .dropdown-content {
             display: block;
         }
         .dropdown-content a {
             color: var(--color-title);
-            padding: 12px 16px;
+            padding: 12px 20px;
             text-decoration: none;
             display: block;
         }
@@ -720,14 +723,58 @@
             .nav-menu {
                 position: fixed; top: 70px; right: -100%; width: 80%; height: 100vh;
                 background-color: var(--color-title); flex-direction: column; align-items: flex-start;
-                padding: 40px; gap: 20px; transition: right 0.4s ease-in-out;
+                padding: 40px; gap: 0; transition: right 0.4s ease-in-out;
                 box-shadow: -5px 0 15px rgba(0,0,0,0.2);
             }
-            .nav-menu.active { right: 0; }
             .nav-menu li { width: 100%; }
+            .nav-menu a {
+                padding: 15px 0;
+                width: 100%;
+            }
+
+            .nav-menu.active { right: 0; }
+            
             .nav-menu.active a { color: var(--color-white); }
             .nav-menu.active a:hover { color: var(--color-primary-cta); }
+            
+            .nav-menu .dropdown {
+                padding-bottom: 0;
+                margin-bottom: 0;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+            }
+            .nav-menu .dropdown a:not(.dropdown-content a) {
+                width: 100%;
+            }
+            
+            .nav-menu .dropdown-content {
+                position: static;
+                display: none;
+                width: 100%;
+                box-shadow: none;
+                background-color: rgba(255,255,255,0.05);
+                padding: 0;
+                border-radius: 0;
+                margin-top: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease-in-out;
+            }
+            .nav-menu .dropdown-content.submenu-open {
+                display: block;
+                max-height: 500px; /* Altura suficiente para los items */
+            }
+
+            .dropdown-content a {
+                padding: 12px 20px;
+                color: var(--color-white);
+            }
+
             .nav-menu.active .dropdown .arrow { border-color: var(--color-white); }
+            .nav-menu.active .dropdown.open > a .arrow {
+                transform: rotate(225deg);
+            }
             .nav-menu.active .dropdown a:hover .arrow { border-color: var(--color-primary-cta); }
 
 
@@ -807,12 +854,11 @@
                     <li><a href="/">Inicio</a></li>
                     <li><a href="#como-funciona">Cómo funciona</a></li>
                     <li class="dropdown">
-                        <a href="#servicios-home">Servicios <span class="arrow"></span></a>
+                        <a href="#servicios-home" id="services-toggle">Servicios <span class="arrow"></span></a>
                         <div class="dropdown-content">
                             <a href="/servicios/derecho-familiar">Derecho Familiar</a>
                             <a href="/servicios/derecho-inmobiliario">Derecho Inmobiliario</a>
                             <a href="/servicios/derecho-laboral">Derecho Laboral</a>
-                            <a href="/servicios/derecho-consumidor">Derecho del Consumidor</a>
                         </div>
                     </li>
                     <li><a href="#equipo-preview">Quiénes somos</a></li>
@@ -870,13 +916,6 @@
                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
                             <h3>Derecho<br>Inmobiliario</h3>
                             <p>Arriendos, compraventas, promesas de compraventa, conflictos con propiedades.</p>
-                        </div>
-                    </a>
-                    <a href="#" class="service-card-link">
-                        <div class="service-card">
-                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-                            <h3>Derecho<br>del Consumidor</h3>
-                            <p>Problemas con productos, servicios, garantías y derechos del consumidor.</p>
                         </div>
                     </a>
                 </div>
@@ -1170,6 +1209,19 @@
         hamburger.addEventListener('click', function() {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
+        });
+
+        // Mobile Dropdown Logic
+        const servicesToggle = document.getElementById('services-toggle');
+        servicesToggle.addEventListener('click', function(e) {
+            if (window.innerWidth <= 992) {
+                e.preventDefault();
+                const dropdown = this.parentElement;
+                const submenu = dropdown.querySelector('.dropdown-content');
+                
+                dropdown.classList.toggle('open');
+                submenu.classList.toggle('submenu-open');
+            }
         });
 
         const faders = document.querySelectorAll('.fade-in');
