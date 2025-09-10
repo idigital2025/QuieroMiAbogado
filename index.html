@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiero Mi Abogado - Tu abogado online en Chile, claro y accesible</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES Y ESTILOS GLOBALES --- */
+        :root {
+            --color-title: #2C3756;
+            --color-paragraph: #54595F;
+            --color-primary-cta: #29c4f0; /* Celeste */
+            --color-white: #ffffff;
+            --color-light-gray: #f9f9fa;
+            --color-services-bg: #e8f4f7; 
+            --color-error: #d9534f;
+            --color-success: #5cb85c;
+            --font-main: 'Poppins', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--color-paragraph);
+            line-height: 1.7;
+            background-color: var(--color-white);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--color-title);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        h1 { font-size: 2.8rem; }
+        h2 { 
+            font-size: 2.2rem; 
+            text-align: center; 
+            position: relative;
+            padding-bottom: 20px;
+            margin-bottom: 2.5rem;
+            text-transform: uppercase;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--color-primary-cta);
+            border-radius: 2px;
+        }
+        h3 { font-size: 1.25rem; }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- BOTONES --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600; 
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-family: var(--font-main);
+            font-size: 1rem;
+        }
+        .btn-primary {
+            background-color: var(--color-primary-cta);
+            color: var(--color-white);
+            border-color: var(--color-primary-cta);
+        }
+        .btn-primary:hover {
+            background-color: var(--color-white);
+            color: var(--color-primary-cta);
+        }
+        .btn-secondary {
+            background-color: var(--color-white);
+            color: var(--color-title);
+            border: 2px solid var(--color-title);
+        }
+        .btn-secondary:hover {
+            background-color: var(--color-title);
+            color: var(--color-white);
+        }
+
+        /* --- HEADER Y NAVEGACIÓN --- */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--color-white);
+            z-index: 1000;
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        .nav-menu a {
+            color: var(--color-title);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .nav-menu a:hover {
+            color: var(--color-primary-cta);
+        }
+        /* Estilo para el enlace de la página activa */
+        .nav-menu a.active-link {
+            color: var(--color-primary-cta);
+            font-weight: 700;
+        }
+        .nav-menu .btn-primary {
+            color: var(--color-white);
+        }
+        .nav-menu .btn-primary:hover {
+            color: var(--color-primary-cta);
+        }
+        .nav-menu .dropdown {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: -15px;
+        }
+        .nav-menu .dropdown .arrow {
+            width: 10px;
+            height: 10px;
+            border-right: 2px solid var(--color-title);
+            border-bottom: 2px solid var(--color-title);
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+        }
+        .nav-menu .dropdown a:hover .arrow {
+            border-color: var(--color-primary-cta);
+        }
+        .nav-menu .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: -15px;
+            background-color: var(--color-white);
+            min-width: 220px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1);
+            border-radius: 10px;
+            z-index: 1;
+            padding: 10px 0;
+        }
+        .nav-menu .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content a {
+            color: var(--color-title);
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+            color: var(--color-primary-cta);
+        }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px 0;
+            background-color: var(--color-title);
+            transition: all 0.3s ease;
+        }
+        
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 100vh;
+            background: url('img/hero-banner-bg.png') no-repeat center center/cover;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            padding-top: 0;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(44, 55, 86, 0.7);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 70px;
+        }
+        .hero-content h1 {
+            color: var(--color-white);
+            margin-bottom: 1rem;
+            text-transform: none;
+        }
+        .hero-content h1::after { display: none; }
+
+        .hero-content h2 {
+            color: var(--color-white);
+            font-size: 1.3rem;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 0;
+            text-transform: none;
+        }
+        .hero-content h2::after { display: none; }
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* --- Intro Section --- */
+        .intro-section {
+            padding: 70px 0;
+            background-color: var(--color-light-gray);
+        }
+        .intro-section h3 {
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto;
+            font-weight: 400;
+            font-size: 1.3rem;
+            color: var(--color-paragraph);
+        }
+        .intro-section h3 strong { font-weight: 600; }
+
+        /* --- Services Section --- */
+        .services-section { background-color: var(--color-services-bg); }
+        .service-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            height: 100%;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .service-card {
+            background-color: var(--color-white);
+            padding: 30px;
+            text-align: center;
+            border-radius: 20px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.07);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        .service-card-link:hover .service-card {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .service-card svg {
+            width: 48px;
+            height: 48px;
+            color: var(--color-primary-cta);
+            margin-bottom: 1rem;
+        }
+        .service-card h3 {
+            margin-bottom: 0.5rem;
+            min-height: 65px;
+        }
+        .service-card p { font-size: 0.8rem; }
+        .services-cta { text-align: center; }
+
+        /* --- How It Works Section --- */
+        .timeline-summary {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px 15px;
+            margin-bottom: 80px;
+        }
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+            color: var(--color-paragraph);
+        }
+        .timeline-item .timeline-number {
+            font-weight: 700;
+            color: var(--color-primary-cta);
+        }
+        .timeline-item .arrow { color: var(--color-primary-cta); }
+        .how-it-works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-top: 40px;
+        }
+        .how-it-works-card {
+            position: relative;
+            background-color: var(--color-white);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            padding: 60px 30px 30px 30px;
+            text-align: center;
+        }
+        .step-number {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: var(--color-primary-cta);
+            color: var(--color-white);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(41, 196, 240, 0.4);
+        }
+        .how-it-works-step svg {
+            width: 60px;
+            height: 60px;
+            color: var(--color-primary-cta);
+            margin-bottom: 1rem;
+        }
+        .how-it-works-step h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .how-it-works-step p { font-size: 0.95rem; }
+
+        /* --- Testimonials Section --- */
+        .testimonials-section {
+            position: relative;
+            color: var(--color-white);
+            background: url('img/testimonials-bg.png') no-repeat center center/cover;
+        }
+        .testimonials-section .section-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(44, 55, 86, 0.85);
+        }
+        .testimonials-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .testimonials-section h2 { color: var(--color-white); }
+        .testimonials-section h2::after { background-color: var(--color-white); }
+        .testimonial-carousel-wrapper {
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+        .testimonial-carousel { overflow: hidden; }
+        .testimonial-slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .testimonial-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: 2px solid var(--color-white);
+            color: var(--color-white);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .carousel-btn:hover {
+            background-color: var(--color-white);
+            color: var(--color-title);
+        }
+        .carousel-btn.prev { left: 0; }
+        .carousel-btn.next { right: 0; }
+        
+        /* --- Team Section --- */
+        .team-section { background-color: var(--color-light-gray); }
+        .team-preview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        .team-member-card {
+            background: var(--color-white);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.07);
+        }
+        .team-card {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        .team-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .team-card h3 { font-size: 1.2rem; margin: 0; }
+        .team-card .role { font-weight: 500; color: var(--color-primary-cta); }
+        .team-info .specialty { font-size: 0.8rem; }
+        .team-info ul { list-style: none; padding-top: 10px; }
+        .team-info li { display: flex; align-items: flex-start; font-size: 0.9rem; }
+        .team-info svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin-right: 10px;
+            margin-top: 4px;
+            color: var(--color-primary-cta);
+        }
+
+        /* --- FAQ Section --- */
+        .faq-section { padding: 120px 0; }
+        .faq-accordion details {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+        .faq-accordion summary {
+            font-weight: 600;
+            color: var(--color-title);
+            cursor: pointer;
+            list-style: none;
+            position: relative;
+            padding-right: 25px;
+        }
+        .faq-accordion summary::-webkit-details-marker { display: none; }
+        .faq-accordion summary::after {
+            content: '+';
+            position: absolute;
+            right: 5px;
+            font-size: 1.5rem;
+            color: var(--color-primary-cta);
+            transition: transform 0.2s;
+        }
+        .faq-accordion details[open] summary::after { transform: rotate(45deg); }
+        .faq-accordion div { padding: 10px 0 0 0; }
+
+        /* --- Final CTA Section --- */
+        .final-cta-section {
+            background-color: var(--color-primary-cta);
+            color: var(--color-white);
+            text-align: center;
+            padding: 100px 0;
+        }
+        .final-cta-section h2, .final-cta-section p { color: var(--color-white); }
+        .final-cta-section h2 { margin-bottom: 1rem; }
+        .final-cta-section h2::after { display: none; }
+        .final-cta-section .trust-seals {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            color: var(--color-white);
+            margin-bottom: 1.5rem;
+        }
+        .final-cta-section .btn-cta-1 {
+            background-color: var(--color-white);
+            color: var(--color-title);
+            border-color: var(--color-title);
+        }
+        .final-cta-section .btn-cta-1:hover {
+            background-color: var(--color-primary-cta);
+            color: var(--color-white);
+            border-color: var(--color-white);
+        }
+        .final-cta-section .btn-cta-2 {
+            background-color: var(--color-primary-cta);
+            color: var(--color-white);
+            border-color: var(--color-white);
+        }
+        .final-cta-section .btn-cta-2:hover {
+            background-color: var(--color-white);
+            color: var(--color-title);
+            border-color: var(--color-white);
+        }
+
+        /* --- Form Section --- */
+        .form-section { padding: 120px 0; }
+        .form-container {
+            background: var(--color-white);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .form-section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+        }
+        .form-content { padding: 50px; }
+        .form-content h2 { text-align: left; }
+        .form-content h2::after {
+            left: 0;
+            transform: translateX(0);
+        }
+        .form-section-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .form-control { 
+            margin-bottom: 20px; 
+            text-align: left;
+        }
+        .form-control label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--color-title);
+        }
+        .form-control input, .form-control textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-family: var(--font-main);
+        }
+        .form-control input.error, .form-control textarea.error { border-color: var(--color-error); }
+        .error-message {
+            color: var(--color-error);
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+        #form-status {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+        }
+        #form-status.success {
+            background-color: #dff0d8;
+            color: var(--color-success);
+            border: 1px solid var(--color-success);
+            display: block;
+        }
+        #form-status.error {
+            background-color: #f2dede;
+            color: var(--color-error);
+            border: 1px solid var(--color-error);
+            display: block;
+        }
+        
+        /* --- FLOATING BUTTONS --- */
+        .floating-buttons-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 998;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .floating-btn {
+            display: grid;
+            place-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+        .floating-btn:hover { transform: translateY(-5px); }
+        #whatsappBtn {
+            background-color: #25D366;
+            color: var(--color-white);
+        }
+        #scrollTopBtn {
+            background-color: var(--color-primary-cta);
+            color: var(--color-white);
+            display: none;
+        }
+
+        /* --- FOOTER STYLES --- */
+        .main-footer {
+            background-color: var(--color-title);
+            color: #a9b3c6;
+            padding: 60px 0;
+            font-size: 0.9rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+        .footer-col h4 {
+            color: var(--color-white);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        .footer-col p, .footer-col a {
+            color: #a9b3c6;
+            text-decoration: none;
+            line-height: 2;
+        }
+        .footer-col a:hover { color: var(--color-primary-cta); }
+        .footer-col ul { list-style: none; }
+        .social-links { display: flex; gap: 15px; margin-top: 1rem; }
+        .social-links a svg { width: 24px; height: 24px; fill: #a9b3c6; transition: fill 0.3s ease; }
+        .social-links a:hover svg { fill: var(--color-primary-cta); }
+
+        /* Estilo para el logo del footer - Mostrar versión blanca */
+        .main-footer .footer-col .logo img {
+            content: url('img/logo-white.svg'); /* Carga el logo blanco */
+            filter: none;
+        }
+
+        /* --- MEDIA QUERIES --- */
+        @media (max-width: 992px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            section { padding: 60px 0; }
+            
+            .nav-menu {
+                position: fixed; top: 70px; right: -100%; width: 80%; height: 100vh;
+                background-color: var(--color-title); flex-direction: column; align-items: flex-start;
+                padding: 40px; gap: 0; transition: right 0.4s ease-in-out;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            }
+            .nav-menu li { width: 100%; }
+            .nav-menu a {
+                padding: 15px 0;
+                width: 100%;
+            }
+
+            .nav-menu.active { right: 0; }
+            .nav-menu.active a { color: var(--color-white); }
+            .nav-menu.active a:hover { color: var(--color-primary-cta); }
+            
+            .nav-menu .dropdown { padding-bottom: 0; margin-bottom: 0; display: flex; flex-wrap: wrap; align-items: center; }
+            .nav-menu .dropdown a:not(.dropdown-content a) { width: 100%; }
+            .nav-menu .dropdown-content { position: static; display: none; width: 100%; box-shadow: none; background-color: rgba(255,255,255,0.05); padding: 0; border-radius: 0; margin-top: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; }
+            .nav-menu .dropdown-content.submenu-open {
+                display: block;
+                max-height: 500px;
+            }
+            .dropdown-content a {
+                padding: 12px 20px;
+                color: var(--color-white);
+            }
+
+            .nav-menu.active .dropdown .arrow { border-color: var(--color-white); }
+            .nav-menu.active .dropdown.open > a .arrow { transform: rotate(225deg); }
+            .nav-menu.active .dropdown a:hover .arrow { border-color: var(--color-primary-cta); }
+
+            .hamburger { display: block; }
+            .hamburger.active span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+            
+            .services-grid { grid-template-columns: 1fr 1fr; }
+            .team-preview-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .services-grid { 
+                grid-template-columns: 1fr; 
+                max-width: 350px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .hero-content {
+                padding-top: 100px;
+                padding-bottom: 30px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                min-height: calc(80vh - 70px);
+            }
+            .hero-buttons { margin-top: auto; }
+
+            .team-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .team-info ul {
+                padding-top: 10px;
+                text-align: left;
+            }
+            .faq-accordion div {
+                padding: 10px 0 0 0;
+            }
+
+            .hero { min-height: 80vh; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .form-section-grid { grid-template-columns: 1fr; }
+            .form-section-grid img { display: none; }
+            .form-content { padding: 40px 30px; }
+            .timeline-summary { justify-content: flex-start; }
+            .testimonial-carousel-wrapper { padding: 0; }
+            .carousel-btn {
+                top: auto;
+                bottom: -60px;
+                transform: translateY(0);
+            }
+            .carousel-btn.prev { left: 35%; }
+            .carousel-btn.next { right: 35%; }
+            .testimonials-section .container { padding-bottom: 60px; }
+        }
+        
+        @media (max-width: 480px) {
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="main-header" id="mainHeader">
+        <div class="container navbar">
+            <a href="index.html" class="logo">
+                <img src="img/logo.svg" alt="Logo de QuieroMiAbogado">
+            </a>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="active-link">Inicio</a></li>
+                    <li><a href="como-funciona.html">Cómo funciona</a></li>
+                    <li class="dropdown">
+                        <a href="servicios.html" id="services-toggle">Servicios <span class="arrow"></span></a>
+                        <div class="dropdown-content">
+                            <a href="derecho-familiar.html">Derecho Familiar</a>
+                            <a href="derecho-inmobiliario.html">Derecho Inmobiliario</a>
+                            <a href="derecho-laboral.html">Derecho Laboral</a>
+                        </div>
+                    </li>
+                    <li><a href="quienes-somos.html">Quiénes somos</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="agendar-reunion.html" class="btn btn-primary">Agendar Reunión</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-overlay"></div>
+            <div class="container hero-content fade-in">
+                <h1>Tu abogado online en Chile,<br>claro y accesible</h1>
+                <h2>Asesoría legal rápida, transparente y 100% en línea. En familia, trabajo, propiedad o salud, estamos para ayudarte.</h2>
+                <div class="hero-buttons">
+                    <a href="agendar-reunion.html" class="btn btn-primary">Agendar reunión ahora</a>
+                    <a href="servicios.html" class="btn btn-secondary">Conocer Servicios Legales</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="intro-section">
+            <div class="container fade-in">
+                <h3>Sabemos que un <strong>problema legal puede ser confuso y estresante.</strong> En Quiero Mi Abogado te ofrecemos orientación <strong>clara y soluciones prácticas en simples pasos,</strong> con reuniones virtuales y abogados especialistas en tu caso.</h3>
+            </div>
+        </section>
+
+        <section id="servicios-home" class="fade-in services-section">
+            <div class="container">
+                <h2>SERVICIOS LEGALES ONLINE PARA CADA NECESIDAD</h2>
+                <div class="services-grid">
+                    <a href="derecho-familiar.html" class="service-card-link">
+                        <div class="service-card">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            <h3>Derecho<br>Familiar</h3>
+                            <p>Divorcios, pensión de alimentos, régimen de visitas, mediaciones y más.</p>
+                        </div>
+                    </a>
+                    <a href="derecho-laboral.html" class="service-card-link">
+                        <div class="service-card">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path><rect width="20" height="14" x="2" y="6" rx="2"></rect></svg>
+                            <h3>Derecho<br>Laboral</h3>
+                            <p>Despidos, finiquitos, demandas laborales, acoso laboral.</p>
+                        </div>
+                    </a>
+                    <a href="derecho-inmobiliario.html" class="service-card-link">
+                        <div class="service-card">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                            <h3>Derecho<br>Inmobiliario</h3>
+                            <p>Arriendos, compraventas, promesas de compraventa, conflictos con propiedades.</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="services-cta">
+                    <a href="servicios.html" class="btn btn-primary">Ver todos los servicios</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="como-funciona" class="fade-in">
+            <div class="container">
+                <h2>CÓMO FUNCIONA NUESTRO SERVICIO</h2>
+                <p style="text-align:center; max-width:700px; margin:-2rem auto 2.5rem auto;">Agenda, paga, reúne antecedentes y conéctate con tu abogado. Todo en 5 simples pasos para que obtengas la asesoría que necesitas de forma rápida y segura.</p>
+                <div class="timeline-summary">
+                    <div class="timeline-item"><span class="timeline-number">1.</span> Completa un formulario breve <span class="arrow">&rarr;</span></div>
+                    <div class="timeline-item"><span class="timeline-number">2.</span> Realiza tu pago online <span class="arrow">&rarr;</span></div>
+                    <div class="timeline-item"><span class="timeline-number">3.</span> Confirma tu cita <span class="arrow">&rarr;</span></div>
+                    <div class="timeline-item"><span class="timeline-number">4.</span> Conversa con asistente virtual <span class="arrow">&rarr;</span></div>
+                    <div class="timeline-item"><span class="timeline-number">5.</span> Conéctate con tu abogado</div>
+                </div>
+                <div class="how-it-works-grid">
+                    <div class="how-it-works-card">
+                        <div class="step-number">1</div>
+                        <div class="how-it-works-step">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
+                            <h3>Completa un formulario breve</h3>
+                            <p>Ingresa tus datos básicos y selecciona el área legal de tu caso.</p>
+                        </div>
+                    </div>
+                    <div class="how-it-works-card">
+                        <div class="step-number">2</div>
+                        <div class="how-it-works-step">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line></svg>
+                            <h3>Realiza tu pago online</h3>
+                            <p>Valor fijo de $28.000. Pago seguro con Webpay o MercadoPago.</p>
+                        </div>
+                    </div>
+                    <div class="how-it-works-card">
+                        <div class="step-number">3</div>
+                        <div class="how-it-works-step">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+                            <h3>Confirma tu cita en el calendario</h3>
+                            <p>Selecciona fecha y hora disponibles, recibirás confirmación automática en tu correo.</p>
+                        </div>
+                    </div>
+                    <div class="how-it-works-card">
+                        <div class="step-number">4</div>
+                        <div class="how-it-works-step">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                            <h3>Conversa con nuestro asistente virtual</h3>
+                            <p>Responde preguntas rápidas para que tu abogado reciba los antecedentes clave.</p>
+                        </div>
+                    </div>
+                    <div class="how-it-works-card">
+                        <div class="step-number">5</div>
+                        <div class="how-it-works-step">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"></path><rect x="2" y="6" width="14" height="12" rx="2"></rect></svg>
+                            <h3>Conéctate con tu abogado</h3>
+                            <p>Recibe tu asesoría legal online en la fecha y hora confirmada.</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 60px;">
+                    <a href="agendar-reunion.html" class="btn btn-primary">Agendar reunión ahora</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials-section fade-in">
+            <div class="section-overlay"></div>
+            <div class="container">
+                <h2>LO QUE DICEN NUESTROS CLIENTES</h2>
+                <div class="testimonial-carousel-wrapper">
+                    <div class="testimonial-carousel">
+                        <div class="testimonial-slides">
+                            <div class="testimonial-slide">
+                                <div class="testimonial-card">
+                                    <p style="font-size: 1.2rem; font-style: italic;">“Me explicaron todo paso a paso y resolvimos el problema sin moverme de casa.”</p>
+                                    <p style="margin-top: 1rem; font-weight: 600;">– Cliente asesoría familiar</p>
+                                </div>
+                            </div>
+                            <div class="testimonial-slide">
+                                <div class="testimonial-card">
+                                    <p style="font-size: 1.2rem; font-style: italic;">“Claridad y rapidez, pude resolver mi problema laboral en una sola reunión.”</p>
+                                    <p style="margin-top: 1rem; font-weight: 600;">– Cliente asesoría laboral</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-btn prev" aria-label="Anterior testimonio">&#10094;</button>
+                    <button class="carousel-btn next" aria-label="Siguiente testimonio">&#10095;</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="equipo-preview" class="fade-in team-section">
+            <div class="container">
+                <h2>CONOCE NUESTROS ABOGADOS ESPECIALISTAS EN CADA ÁREA</h2>
+                <p style="text-align:center; max-width:700px; margin:-2rem auto 2.5rem auto;">Conoce a algunos de los abogados que estarán contigo en tu caso, con experiencia real y enfoque en soluciones claras.</p>
+                <div class="team-preview-grid">
+                    <div class="team-member-card">
+                        <div class="team-card">
+                            <img src="img/abogada-michelle-venthur.png" alt="Foto de Michelle Marcela Venthur Candia">
+                            <div class="team-info">
+                                <h3>Michelle Marcela Venthur Candia</h3>
+                                <span class="role">Abogado Socia</span>
+                                <p class="specialty">Especialista en Derecho Penal y Corporativo.</p>
+                                <ul>
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path><circle cx="12" cy="8" r="6"></circle></svg> Más de 6 años de experiencia en litigios y asesoría preventiva.</li>
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg> Idiomas: español e inglés.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-member-card">
+                        <div class="team-card">
+                            <img src="img/abogado-paolo-moreno.png" alt="Foto de Paolo Arturo Moreno Rodríguez">
+                            <div class="team-info">
+                                <h3>Paolo Arturo Moreno Rodríguez</h3>
+                                <span class="role">Abogado socio fundador</span>
+                                <p class="specialty">Especialista en Derecho Ambiental y Corporativo.</p>
+                                <ul>
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path><circle cx="12" cy="8" r="6"></circle></svg> Más de 15 años de experiencia en juicios y docencia universitaria.</li>
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg> Idiomas: español e inglés.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div style="text-align: center;">
+                    <a href="quienes-somos.html#equipo" class="btn btn-primary">Ver todo el equipo</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq-home" class="container fade-in faq-section">
+            <h2>PREGUNTAS FRECUENTES</h2>
+            <div class="faq-accordion" style="max-width: 800px; margin: 0 auto;">
+                <details>
+                    <summary>¿Cuánto cuesta la reunión?</summary>
+                    <div><p>$28.000, pago seguro online.</p></div>
+                </details>
+                <details>
+                    <summary>¿Dónde se realizan las asesorías?</summary>
+                    <div><p>100% online, vía videollamada.</p></div>
+                </details>
+                <details>
+                    <summary>¿Qué áreas legales atienden?</summary>
+                    <div><p>Familiar, Laboral, Inmobiliario y Salud.</p></div>
+                </details>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="contacto.html" class="btn btn-secondary">Ver todas las preguntas</a>
+            </div>
+        </section>
+
+        <section class="final-cta-section fade-in">
+            <div class="container">
+                <h2>Resuelve tu caso legal hoy mismo</h2>
+                <div class="trust-seals">
+                    <div class="seal">✓ Pago seguro</div>
+                    <div class="seal">✓ Abogados colegiados</div>
+                    <div class="seal">✓ Servicio 100% online</div>
+                </div>
+                <p>Agenda en simples pasos y recibe asesoría clara y especializada.</p>
+                <div style="margin-top: 2rem; display:flex; justify-content:center; gap: 15px; flex-wrap:wrap;">
+                    <a href="agendar-reunion.html" class="btn btn-cta-1">Agendar reunión ahora</a>
+                    <a href="contacto.html" class="btn btn-cta-2">Contáctanos</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="formulario-home" class="container fade-in form-section">
+            <div class="form-container">
+                <div class="form-section-grid">
+                    <div class="form-content">
+                        <h2>¿TIENES DUDAS ANTES DE AGENDAR TU REUNIÓN?</h2>
+                        <p>Si todavía no estás seguro de cómo empezar, escríbenos y te orientaremos en el proceso.</p>
+                        <form id="contactForm" style="margin-top:2rem;" novalidate>
+                            <div id="form-status"></div>
+                            <div class="form-control">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
+                                <div class="error-message" id="nombreError">El nombre es obligatorio.</div>
+                            </div>
+                            <div class="form-control">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                                <div class="error-message" id="emailError">Ingresa un email válido.</div>
+                            </div>
+                            <div class="form-control">
+                                <label for="telefono">Teléfono</label>
+                                <input type="tel" id="telefono" name="telefono" placeholder="+56 9 1234 5678">
+                            </div>
+                            <div class="form-control">
+                                <label for="consulta">Tu consulta breve</label>
+                                <textarea id="consulta" name="consulta" rows="4" placeholder="Cuéntanos brevemente sobre tu situación legal..." required></textarea>
+                                <div class="error-message" id="consultaError">La consulta es obligatoria.</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar consulta</button>
+                        </form>
+                    </div>
+                    <img src="img/form-imagen-reunion.png" alt="Abogado en reunión con cliente">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="floating-buttons-container">
+         <a href="https://wa.me/56912345678" target="_blank" id="whatsappBtn" class="floating-btn" title="Contáctanos por WhatsApp">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 4.315 1.731 6.086l-.219.324-1.123 4.102 4.195-1.102.333-.232zM15.347 13.483c-.225-.112-1.327-.655-1.533-.73-.205-.075-.354-.112-.504.112s-.58.73-.711.879-.262.168-.486.056-.947-.349-1.804-1.113c-.667-.595-1.117-1.329-1.248-1.554s-.012-.354.1-.466c.101-.1.224-.262.336-.393.112-.131.149-.224.224-.374s.038-.281-.019-.393c-.056-.112-.504-1.217-.692-1.666-.181-.435-.366-.375-.504-.382-.131-.007-.281-.007-.431-.007s-.393.056-.613.28c-.22.225-.851.825-.851 2.005s.876 2.321 1.001 2.486c.125.166 1.711 2.616 4.159 3.632.589.24 1.052.383 1.422.486.64.17 1.212.149 1.666-.075.517-.258 1.533-.631 1.748-1.243.213-.612.213-1.141.149-1.243s-.224-.166-.486-.279z"/>
+            </svg>
+        </a>
+        <a href="#" id="scrollTopBtn" class="floating-btn" title="Ir arriba">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+        </a>
+    </div>
+
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <a href="index.html" class="logo">
+                     <img src="img/logo-white.svg" alt="Logo de QuieroMiAbogado">
+                </a>
+                <p style="margin-top:1rem;">Tu plataforma de asesoría legal online en Chile.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Enlaces</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
+                    <li><a href="como-funciona.html">Cómo funciona</a></li>
+                    <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legales</h4>
+                 <ul>
+                    <li><a href="/politica-de-privacidad.pdf" target="_blank">Política de Privacidad</a></li>
+                    <li><a href="/terminos-y-condiciones.pdf" target="_blank">Términos y Condiciones</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <p>
+                    <a href="mailto:contacto@quieromiabogado.cl">contacto@quieromiabogado.cl</a><br>
+                    <a href="tel:+56912345678">+56 9 1234 5678</a>
+                </p>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.645-.07-4.85s.012-3.584.07-4.85c.148-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"/></svg></a>
+                    <a href="#" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ... El JavaScript no necesita cambios ...
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                scrollTopBtn.style.display = "grid";
+            } else {
+                scrollTopBtn.style.display = "none";
+            }
+        };
+
+        scrollTopBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        const servicesToggle = document.getElementById('services-toggle');
+        servicesToggle.addEventListener('click', function(e) {
+            if (window.innerWidth <= 992 && this.parentElement.classList.contains('dropdown')) {
+                e.preventDefault();
+                const dropdown = this.parentElement;
+                const submenu = dropdown.querySelector('.dropdown-content');
+                
+                dropdown.classList.toggle('open');
+                submenu.classList.toggle('submenu-open');
+            }
+        });
+
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            });
+        }, appearOptions);
+        faders.forEach(fader => appearOnScroll.observe(fader));
+
+        const slidesContainer = document.querySelector('.testimonial-slides');
+        if (slidesContainer) {
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const prevBtn = document.querySelector('.carousel-btn.prev');
+            const nextBtn = document.querySelector('.carousel-btn.next');
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+
+            if(prevBtn && nextBtn) {
+                prevBtn.addEventListener('click', () => {
+                    currentIndex = (currentIndex > 0) ? currentIndex - 1 : slides.length - 1;
+                    updateCarousel();
+                });
+
+                nextBtn.addEventListener('click', () => {
+                    currentIndex = (currentIndex < slides.length - 1) ? currentIndex + 1 : 0;
+                    updateCarousel();
+                });
+            }
+        }
+
+        const form = document.getElementById('contactForm');
+        if (form) {
+            const formStatus = document.getElementById('form-status');
+            const nombre = document.getElementById('nombre');
+            const email = document.getElementById('email');
+            const consulta = document.getElementById('consulta');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = validateForm();
+                if (isValid) {
+                    formStatus.className = 'success';
+                    formStatus.textContent = '¡Gracias por tu consulta! Te contactaremos a la brevedad.';
+                    form.reset();
+                } else {
+                     formStatus.className = 'error';
+                     formStatus.textContent = 'Por favor, corrige los errores antes de enviar.';
+                }
+            });
+
+            function validateForm() {
+                let valid = true;
+                document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.form-control input, .form-control textarea').forEach(el => el.classList.remove('error'));
+                
+                if (nombre.value.trim() === '') {
+                    showError('nombreError', nombre);
+                    valid = false;
+                }
+                if (!isValidEmail(email.value)) {
+                    showError('emailError', email);
+                    valid = false;
+                }
+                if (consulta.value.trim() === '') {
+                    showError('consultaError', consulta);
+                    valid = false;
+                }
+                return valid;
+            }
+
+            function showError(errorId, inputElement) {
+                document.getElementById(errorId).style.display = 'block';
+                inputElement.classList.add('error');
+            }
+
+            function isValidEmail(email) {
+                const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            }
+        }
+    });
+    </script>
+
+</body>
+</html>

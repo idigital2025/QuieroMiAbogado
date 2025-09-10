@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto y Ayuda - Quiero Mi Abogado</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES Y ESTILOS GLOBALES --- */
+        :root {
+            --color-title: #2C3756;
+            --color-paragraph: #54595F;
+            --color-primary-cta: #29c4f0; /* Celeste */
+            --color-white: #ffffff;
+            --color-light-gray: #f9f9fa;
+            --color-section-bg: #e8f4f7; 
+            --color-error: #d9534f;
+            --color-success: #5cb85c;
+            --font-main: 'Poppins', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--color-paragraph);
+            line-height: 1.7;
+            background-color: var(--color-white);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--color-title);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        h1 { font-size: 2.8rem; }
+        h2 { 
+            font-size: 2.2rem; 
+            text-align: center; 
+            position: relative;
+            padding-bottom: 20px;
+            margin-bottom: 2.5rem;
+            text-transform: uppercase;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--color-primary-cta);
+            border-radius: 2px;
+        }
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.2rem; }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600; 
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-family: var(--font-main);
+            font-size: 1rem;
+        }
+        .btn-primary {
+            background-color: var(--color-primary-cta);
+            color: var(--color-white);
+            border-color: var(--color-primary-cta);
+        }
+        .btn-primary:hover {
+            background-color: var(--color-white);
+            color: var(--color-primary-cta);
+        }
+        .btn-secondary {
+            background-color: var(--color-white);
+            color: var(--color-title);
+            border: 2px solid var(--color-title);
+        }
+        .btn-secondary:hover {
+            background-color: var(--color-title);
+            color: var(--color-white);
+        }
+
+        /* --- HEADER Y NAVEGACIÓN --- */
+        .main-header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background-color: var(--color-white); z-index: 1000;
+            padding: 10px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .navbar { display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 50px; width: auto; }
+        .nav-menu { list-style: none; display: flex; align-items: center; gap: 25px; }
+        .nav-menu a { color: var(--color-title); text-decoration: none; font-weight: 500; transition: color 0.3s ease; display: flex; align-items: center; gap: 5px; }
+        .nav-menu a:hover { color: var(--color-primary-cta); }
+        .nav-menu a.active-link { color: var(--color-primary-cta); font-weight: 700; }
+        .nav-menu .btn-primary { color: var(--color-white); }
+        .nav-menu .btn-primary:hover { color: var(--color-primary-cta); }
+        .nav-menu .dropdown { position: relative; padding-bottom: 15px; margin-bottom: -15px; }
+        .nav-menu .dropdown .arrow { width: 10px; height: 10px; border-right: 2px solid var(--color-title); border-bottom: 2px solid var(--color-title); transform: rotate(45deg); transition: all 0.3s ease; }
+        .nav-menu .dropdown a:hover .arrow { border-color: var(--color-primary-cta); }
+        .nav-menu .dropdown-content { display: none; position: absolute; top: 100%; left: -15px; background-color: var(--color-white); min-width: 220px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1); border-radius: 10px; z-index: 1; padding: 10px 0; }
+        .nav-menu .dropdown:hover .dropdown-content { display: block; }
+        .dropdown-content a { color: var(--color-title); padding: 12px 20px; text-decoration: none; display: block; }
+        .dropdown-content a:hover { background-color: #f1f1f1; color: var(--color-primary-cta); }
+        .hamburger { display: none; cursor: pointer; }
+        .hamburger span { display: block; width: 25px; height: 3px; margin: 5px 0; background-color: var(--color-title); transition: all 0.3s ease; }
+        
+        /* --- ESTILOS PÁGINA CONTACTO --- */
+        .page-hero {
+            padding: 180px 0 120px;
+            background-color: var(--color-title);
+            text-align: center;
+            color: var(--color-white);
+        }
+        .page-hero h2 { color: var(--color-white); margin-bottom: 1rem; }
+        .page-hero h2::after { background-color: var(--color-white); }
+        .page-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+            opacity: 0.9;
+        }
+        .page-hero .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .contact-form-section { padding: 80px 0; }
+        .contact-form-section .form-intro { text-align: center; max-width: 700px; margin: -2rem auto 3rem auto; }
+        
+        .form-container {
+            background: var(--color-white);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            padding: 50px;
+            max-width: 800px;
+            margin: auto;
+        }
+        .form-control { margin-bottom: 20px; text-align: left; }
+        .form-control label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--color-title); }
+        .form-control input, .form-control textarea, .form-control select {
+            width: 100%; padding: 12px 15px; border-radius: 10px;
+            border: 1px solid #ccc; font-family: var(--font-main);
+            background-color: var(--color-light-gray);
+        }
+        .form-control select { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232C3756' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1.2em; }
+        .form-control-checkbox { display: flex; align-items: flex-start; gap: 10px; }
+        .form-control-checkbox input { width: auto; margin-top: 5px; }
+        .form-control-checkbox label { font-weight: normal; font-size: 0.9rem; }
+        .form-control input.error, .form-control textarea.error, .form-control select.error { border-color: var(--color-error); }
+        .error-message { color: var(--color-error); font-size: 0.8rem; margin-top: 5px; display: none; }
+        #form-status { margin-bottom: 15px; padding: 15px; border-radius: 10px; display: none; }
+        #form-status.success { background-color: #dff0d8; color: var(--color-success); border: 1px solid var(--color-success); display: block; }
+        #form-status.error { background-color: #f2dede; color: var(--color-error); border: 1px solid var(--color-error); display: block; }
+
+        .faq-section { background-color: var(--color-section-bg); }
+        .faq-intro { text-align: center; max-width: 700px; margin: -2rem auto 3rem auto; }
+        .faq-categories { max-width: 900px; margin: 0 auto; }
+        .faq-category { margin-bottom: 30px; }
+        .faq-category h4 { margin-bottom: 15px; border-bottom: 2px solid var(--color-primary-cta); padding-bottom: 10px; }
+        .faq-accordion details { border-bottom: 1px solid #ddd; padding: 15px 0; }
+        .faq-accordion summary { font-weight: 600; color: var(--color-title); cursor: pointer; list-style: none; position: relative; padding-right: 25px; }
+        .faq-accordion summary::-webkit-details-marker { display: none; }
+        .faq-accordion summary::after { content: '+'; position: absolute; right: 5px; font-size: 1.5rem; color: var(--color-primary-cta); transition: transform 0.2s; }
+        .faq-accordion details[open] summary::after { transform: rotate(45deg); }
+        .faq-accordion div { padding: 10px 0 0 0; }
+        .faq-cta { text-align: center; border-top: 1px solid #ddd; padding-top: 30px; margin-top: 40px; }
+        .faq-cta h4 { font-size: 1.3rem; }
+        .faq-cta div { display: flex; justify-content: center; gap: 15px; margin-top: 1rem; }
+
+        /* --- FOOTER STYLES --- */
+        .main-footer { background-color: var(--color-title); color: #a9b3c6; padding: 60px 0; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+        .footer-col h4 { color: var(--color-white); margin-bottom: 1rem; font-size: 1.1rem; }
+        .footer-col p, .footer-col a { color: #a9b3c6; text-decoration: none; line-height: 2; }
+        .footer-col a:hover { color: var(--color-primary-cta); }
+        .footer-col ul { list-style: none; }
+        .social-links { display: flex; gap: 15px; margin-top: 1rem; }
+        .social-links a svg { width: 24px; height: 24px; fill: #a9b3c6; transition: fill 0.3s ease; }
+        .social-links a:hover svg { fill: var(--color-primary-cta); }
+        
+        .main-footer .footer-col .logo img {
+            content: url('img/logo-white.svg');
+            filter: none;
+        }
+
+        @media (max-width: 992px) {
+            h2 { font-size: 1.8rem; }
+            section { padding: 60px 0; }
+            .nav-menu { position: fixed; top: 70px; right: -100%; width: 80%; height: 100vh; background-color: var(--color-title); flex-direction: column; align-items: flex-start; padding: 40px; gap: 0; transition: right 0.4s ease-in-out; box-shadow: -5px 0 15px rgba(0,0,0,0.2); }
+            .nav-menu li { width: 100%; }
+            .nav-menu a { padding: 15px 0; width: 100%; }
+            .nav-menu.active { right: 0; }
+            .nav-menu.active a { color: var(--color-white); }
+            .nav-menu.active a:hover { color: var(--color-primary-cta); }
+            .nav-menu .dropdown { padding-bottom: 0; margin-bottom: 0; display: flex; flex-wrap: wrap; align-items: center; }
+            .nav-menu .dropdown a:not(.dropdown-content a) { width: 100%; }
+            .nav-menu .dropdown-content { position: static; display: none; width: 100%; box-shadow: none; background-color: rgba(255,255,255,0.05); padding: 0; border-radius: 0; margin-top: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; }
+            .nav-menu .dropdown-content.submenu-open { display: block; max-height: 500px; }
+            .dropdown-content a { padding: 12px 20px; color: var(--color-white); }
+            .nav-menu.active .dropdown .arrow { border-color: var(--color-white); }
+            .nav-menu.active .dropdown.open > a .arrow { transform: rotate(225deg); }
+            .nav-menu.active .dropdown a:hover .arrow { border-color: var(--color-primary-cta); }
+            .hamburger { display: block; }
+            .hamburger.active span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        
+        @media (max-width: 480px) {
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="main-header" id="mainHeader">
+        <div class="container navbar">
+            <a href="index.html" class="logo">
+                <img src="img/logo.svg" alt="Logo de QuieroMiAbogado">
+            </a>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="como-funciona.html">Cómo funciona</a></li>
+                    <li class="dropdown">
+                        <a href="servicios.html" id="services-toggle">Servicios <span class="arrow"></span></a>
+                        <div class="dropdown-content">
+                            <a href="derecho-familiar.html">Derecho Familiar</a>
+                            <a href="derecho-inmobiliario.html">Derecho Inmobiliario</a>
+                            <a href="derecho-laboral.html">Derecho Laboral</a>
+                        </div>
+                    </li>
+                    <li><a href="quienes-somos.html">Quiénes somos</a></li>
+                    <li><a href="contacto.html" class="active-link">Contacto</a></li>
+                    <li><a href="agendar-reunion.html" class="btn btn-primary">Agendar Reunión</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="container">
+                <h2>CONTACTO & AYUDA</h2>
+                <p>¿Tienes dudas o necesitas orientación rápida? Escríbenos o revisa nuestras preguntas frecuentes. Si no encuentras la respuesta ahí, completa el formulario de contacto y te ayudaremos en menos de 24 horas hábiles.</p>
+                <div class="hero-buttons">
+                    <a href="agendar-reunion.html" class="btn btn-primary">Agendar reunión ahora</a>
+                    <a href="#faq" class="btn btn-secondary">Ir a Preguntas Frecuentes</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="form" class="contact-form-section">
+            <div class="container">
+                <div class="form-intro">
+                    <h2>ESCRÍBENOS DIRECTAMENTE</h2>
+                    <p>Completa el formulario y te responderemos dentro de 24 horas hábiles. Si tu caso es urgente, agenda tu reunión ahora para atención prioritaria.</p>
+                </div>
+                <div class="form-container">
+                    <form id="contactForm" novalidate>
+                        <div id="form-status"></div>
+                        <div class="form-control">
+                            <label for="nombre">Nombre y Apellido</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                            <div class="error-message" id="nombreError">El nombre es obligatorio.</div>
+                        </div>
+                        <div class="form-control">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                            <div class="error-message" id="emailError">Ingresa un email válido.</div>
+                        </div>
+                        <div class="form-control">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" id="telefono" name="telefono" placeholder="+56 9 1234 5678" required>
+                             <div class="error-message" id="telefonoError">El teléfono es obligatorio.</div>
+                        </div>
+                        <div class="form-control">
+                            <label for="area-legal">Área legal</label>
+                            <select id="area-legal" name="area-legal" required>
+                                <option value="">Selecciona un área...</option>
+                                <option value="Familiar">Familiar</option>
+                                <option value="Laboral">Laboral</option>
+                                <option value="Inmobiliario">Inmobiliario</option>
+                                <option value="Salud">Salud</option>
+                            </select>
+                            <div class="error-message" id="areaError">Debes seleccionar un área.</div>
+                        </div>
+                        <div class="form-control">
+                            <label for="consulta">Tu consulta</label>
+                            <textarea id="consulta" name="consulta" rows="4" required></textarea>
+                            <div class="error-message" id="consultaError">La consulta es obligatoria.</div>
+                        </div>
+                        <div class="form-control">
+                            <label for="archivo">Adjuntar archivo (opcional, máx. 10 MB)</label>
+                            <input type="file" id="archivo" name="archivo">
+                        </div>
+                        <div class="form-control-checkbox">
+                            <input type="checkbox" id="consentimiento" name="consentimiento" required>
+                            <label for="consentimiento">Acepto el tratamiento de mis datos según la <a href="/politica-de-privacidad.pdf" target="_blank">Política de Privacidad</a>.</label>
+                        </div>
+                        <div class="error-message" id="consentimientoError" style="text-align:center;">Debes aceptar la política de privacidad.</div>
+                        <div style="text-align: center; margin-top: 30px;">
+                            <button type="submit" class="btn btn-primary">Enviar consulta</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="faq-section">
+            <div class="container">
+                <div class="faq-intro">
+                    <h2>PREGUNTAS FRECUENTES</h2>
+                    <p>¿Tienes dudas? Puedes revisar nuestras preguntas frecuentes de forma rápida y clara. Si no encuentras la respuesta ahí, completa nuestro formulario de contacto y te ayudaremos en menos de 24 horas hábiles.</p>
+                </div>
+                <div class="faq-categories">
+                    <div class="faq-category">
+                        <h4>Sobre la reunión</h4>
+                        <div class="faq-accordion">
+                            <details>
+                                <summary>¿Cuál es el valor de la reunión?</summary>
+                                <div><p>$28.000 CLP.</p></div>
+                            </details>
+                            <details>
+                                <summary>¿Qué incluye este valor?</summary>
+                                <div><p>Primera asesoría online, se descuenta de honorarios posteriores.</p></div>
+                            </details>
+                            <details>
+                                <summary>¿Cómo se realiza la reunión?</summary>
+                                <div><p>100% online, vía videollamada.</p></div>
+                            </details>
+                             <details>
+                                <summary>¿Cuánto dura la reunión?</summary>
+                                <div><p>Aprox. 45 minutos.</p></div>
+                            </details>
+                             <details>
+                                <summary>¿Qué pasa después de la reunión?</summary>
+                                <div><p>Propuesta de honorarios si decides continuar.</p></div>
+                            </details>
+                        </div>
+                    </div>
+                    <div class="faq-category">
+                        <h4>Pagos y agendamiento</h4>
+                        <div class="faq-accordion">
+                            <details>
+                                <summary>¿Cómo pago la reunión?</summary>
+                                <div><p>Pago seguro con Webpay o MercadoPago.</p></div>
+                            </details>
+                             <details>
+                                <summary>¿Puedo reagendar mi reunión?</summary>
+                                <div><p>Sí, hasta 24 h antes sin costo.</p></div>
+                            </details>
+                            <details>
+                                <summary>¿Puedo cancelar mi reunión?</summary>
+                                <div><p>Sí, con 24 h de anticipación (aplica reembolso según políticas).</p></div>
+                            </details>
+                             <details>
+                                <summary>¿Cuánto tiempo tengo para agendar mi reunión después de pagar?</summary>
+                                <div><p>Hasta 30 días. Recomendamos hacerlo pronto para asegurar disponibilidad.</p></div>
+                            </details>
+                        </div>
+                    </div>
+                     <div class="faq-category">
+                        <h4>Asistente virtual y preparación</h4>
+                        <div class="faq-accordion">
+                             <details>
+                                <summary>¿Qué pasa si no completo la entrevista con el asistente virtual?</summary>
+                                <div><p>La reunión se hace igual, pero recomendamos completarla para aprovechar mejor el tiempo.</p></div>
+                            </details>
+                            <details>
+                                <summary>¿Qué documentos conviene tener a mano?</summary>
+                                <div><p>Contratos, certificados, boletas, correos u otros antecedentes relevantes.</p></div>
+                            </details>
+                        </div>
+                    </div>
+                     <div class="faq-category">
+                        <h4>Áreas legales y cobertura</h4>
+                        <div class="faq-accordion">
+                             <details>
+                                <summary>¿En qué áreas legales me pueden ayudar?</summary>
+                                <div><p>Familiar, Laboral, Inmobiliario y Salud.</p></div>
+                            </details>
+                            <details>
+                                <summary>¿Qué pasa si necesito otro tipo de servicio legal?</summary>
+                                <div><p>Si tu caso es de otra área, te orientaremos con alternativas externas de confianza.</p></div>
+                            </details>
+                        </div>
+                    </div>
+                     <div class="faq-category">
+                        <h4>Comunicación y soporte</h4>
+                        <div class="faq-accordion">
+                             <details>
+                                <summary>¿Qué debo hacer si no recibo el correo de confirmación?</summary>
+                                <div><p>Revisa bandeja de entrada y spam. Si no llega en 1 hora, escríbenos a contacto@quieromiabogado.cl.</p></div>
+                            </details>
+                            <details>
+                                <summary>¿Qué ocurre si tengo problemas técnicos el día de la reunión?</summary>
+                                <div><p>Contáctanos de inmediato y reagendamos sin costo por causa técnica.</p></div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-cta">
+                    <h4>¿NO ENCONTRASTE LO QUE BUSCABAS?</h4>
+                    <div>
+                        <a href="agendar-reunion.html" class="btn btn-primary">Agendar reunión ahora</a>
+                        <a href="#form" class="btn btn-secondary">Enviar consulta</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <a href="index.html" class="logo">
+                     <img src="img/logo-white.svg" alt="Logo de QuieroMiAbogado">
+                </a>
+                <p style="margin-top:1rem;">Tu plataforma de asesoría legal online en Chile.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Enlaces</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
+                    <li><a href="como-funciona.html">Cómo funciona</a></li>
+                    <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legales</h4>
+                 <ul>
+                    <li><a href="/politica-de-privacidad.pdf" target="_blank">Política de Privacidad</a></li>
+                    <li><a href="/terminos-y-condiciones.pdf" target="_blank">Términos y Condiciones</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <p>
+                    <a href="mailto:contacto@quieromiabogado.cl">contacto@quieromiabogado.cl</a><br>
+                    <a href="tel:+56912345678">+56 9 1234 5678</a>
+                </p>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.645-.07-4.85s.012-3.584.07-4.85c.148-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"/></svg></a>
+                    <a href="#" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        const servicesToggle = document.getElementById('services-toggle');
+        servicesToggle.addEventListener('click', function(e) {
+            if (window.innerWidth <= 992) {
+                e.preventDefault();
+                const dropdown = this.parentElement;
+                const submenu = dropdown.querySelector('.dropdown-content');
+                
+                dropdown.classList.toggle('open');
+                submenu.classList.toggle('submenu-open');
+            }
+        });
+        
+        const form = document.getElementById('contactForm');
+        if (form) {
+            const formStatus = document.getElementById('form-status');
+            const nombre = document.getElementById('nombre');
+            const email = document.getElementById('email');
+            const telefono = document.getElementById('telefono');
+            const area = document.getElementById('area-legal');
+            const consulta = document.getElementById('consulta');
+            const consentimiento = document.getElementById('consentimiento');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = validateForm();
+                if (isValid) {
+                    formStatus.className = 'success';
+                    formStatus.innerHTML = '¡Gracias! Te contactaremos dentro de 24 h hábiles. Si necesitas atención inmediata, <a href="agendar-reunion.html" style="color: var(--color-success); font-weight: bold;">agenda tu reunión ahora</a>.';
+                    form.reset();
+                } else {
+                     formStatus.className = 'error';
+                     formStatus.textContent = 'Por favor, corrige los errores antes de enviar.';
+                }
+            });
+
+            function validateForm() {
+                let valid = true;
+                document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.form-control input, .form-control textarea, .form-control select').forEach(el => el.classList.remove('error'));
+                document.getElementById('consentimientoError').style.display = 'none';
+
+                if (nombre.value.trim() === '') { showError('nombreError', nombre); valid = false; }
+                if (!isValidEmail(email.value)) { showError('emailError', email); valid = false; }
+                if (telefono.value.trim() === '') { showError('telefonoError', telefono); valid = false; }
+                if (area.value === '') { showError('areaError', area); valid = false; }
+                if (consulta.value.trim() === '') { showError('consultaError', consulta); valid = false; }
+                if (!consentimiento.checked) { document.getElementById('consentimientoError').style.display = 'block'; valid = false; }
+                
+                return valid;
+            }
+
+            function showError(errorId, inputElement) {
+                document.getElementById(errorId).style.display = 'block';
+                inputElement.classList.add('error');
+            }
+
+            function isValidEmail(email) {
+                const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            }
+        }
+    });
+    </script>
+
+</body>
+</html>

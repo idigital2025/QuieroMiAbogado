@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Derecho Inmobiliario - Quiero Mi Abogado</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES Y ESTILOS GLOBALES --- */
+        :root {
+            --color-title: #2C3756;
+            --color-paragraph: #54595F;
+            --color-primary-cta: #29c4f0; /* Celeste */
+            --color-white: #ffffff;
+            --color-light-gray: #f9f9fa;
+            --color-services-bg: #e8f4f7; 
+            --color-error: #d9534f;
+            --color-success: #5cb85c;
+            --font-main: 'Poppins', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--color-paragraph);
+            line-height: 1.7;
+            background-color: var(--color-white);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--color-title);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        h1 { font-size: 2.8rem; }
+        h2 { 
+            font-size: 2.2rem; 
+            text-align: center; 
+            position: relative;
+            padding-bottom: 20px;
+            margin-bottom: 2.5rem;
+            text-transform: uppercase;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--color-primary-cta);
+            border-radius: 2px;
+        }
+        h3 { font-size: 1.5rem; }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        /* --- BOTONES --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600; 
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-family: var(--font-main);
+            font-size: 1rem;
+        }
+        .btn-primary {
+            background-color: var(--color-primary-cta);
+            color: var(--color-white);
+            border-color: var(--color-primary-cta);
+        }
+        .btn-primary:hover {
+            background-color: var(--color-white);
+            color: var(--color-primary-cta);
+        }
+        .btn-secondary {
+            background-color: var(--color-white);
+            color: var(--color-title);
+            border: 2px solid var(--color-title);
+        }
+        .btn-secondary:hover {
+            background-color: var(--color-title);
+            color: var(--color-white);
+        }
+
+        /* --- HEADER Y NAVEGACIÓN --- */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--color-white);
+            z-index: 1000;
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        .nav-menu a {
+            color: var(--color-title);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .nav-menu a:hover {
+            color: var(--color-primary-cta);
+        }
+        /* Estilo para el enlace de la página activa */
+        .nav-menu a.active-link {
+            color: var(--color-primary-cta);
+            font-weight: 700;
+        }
+        .nav-menu .btn-primary {
+            color: var(--color-white);
+        }
+        .nav-menu .btn-primary:hover {
+            color: var(--color-primary-cta);
+        }
+        .nav-menu .dropdown {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: -15px;
+        }
+        .nav-menu .dropdown .arrow {
+            width: 10px;
+            height: 10px;
+            border-right: 2px solid var(--color-title);
+            border-bottom: 2px solid var(--color-title);
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+        }
+        .nav-menu .dropdown a:hover .arrow {
+            border-color: var(--color-primary-cta);
+        }
+        .nav-menu .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: -15px;
+            background-color: var(--color-white);
+            min-width: 220px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1);
+            border-radius: 10px;
+            z-index: 1;
+            padding: 10px 0;
+        }
+        .nav-menu .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content a {
+            color: var(--color-title);
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+            color: var(--color-primary-cta);
+        }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px 0;
+            background-color: var(--color-title);
+            transition: all 0.3s ease;
+        }
+        
+        /* --- ESTILOS DE PÁGINA DE SERVICIO --- */
+        .service-hero {
+            padding: 160px 0 100px;
+            background-color: var(--color-title);
+            text-align: center;
+            color: var(--color-white);
+        }
+        .service-hero h2 {
+            color: var(--color-white);
+            margin-bottom: 1rem;
+        }
+        .service-hero h2::after { background-color: var(--color-white); }
+        .service-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+            opacity: 0.9;
+        }
+        .service-hero .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .intro-section h3 {
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto;
+            font-weight: 400;
+            font-size: 1.3rem;
+            color: var(--color-paragraph);
+        }
+        .intro-section h3 strong.highlight {
+            font-weight: 600;
+            color: var(--color-primary-cta);
+        }
+        
+        .service-list-section {
+            background-color: var(--color-services-bg);
+        }
+        .service-list-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .service-list-item {
+            background: var(--color-white);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .service-list-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .service-list-item a {
+            text-decoration: none;
+            color: var(--color-title);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .service-list-item svg {
+            width: 24px;
+            height: 24px;
+            color: var(--color-primary-cta);
+        }
+
+        .service-detail-block {
+            padding: 40px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .service-detail-block:first-of-type {
+            padding-top: 0;
+        }
+        .service-detail-block:last-of-type {
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        .service-detail-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 25px;
+            align-items: flex-start;
+        }
+        .service-detail-icon {
+            width: 40px;
+            height: 40px;
+            color: var(--color-primary-cta);
+        }
+        .service-detail-text h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .section-end-cta {
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        .why-us-section {
+            background-color: var(--color-light-gray);
+        }
+        .why-us-list {
+            list-style: none;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .why-us-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        .why-us-list svg {
+            width: 24px;
+            height: 24px;
+            color: var(--color-primary-cta);
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        .final-cta-section {
+            background-color: var(--color-primary-cta);
+            color: var(--color-white);
+            text-align: center;
+        }
+        .final-cta-section h2, .final-cta-section p { color: var(--color-white); }
+        .final-cta-section h2 {
+            margin-bottom: 1rem;
+        }
+        .final-cta-section h2::after { display: none; }
+        .final-cta-section .trust-seals {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            color: var(--color-white);
+            margin-bottom: 1.5rem;
+        }
+        .final-cta-section .btn-cta-1 {
+            background-color: var(--color-white);
+            color: var(--color-title);
+            border-color: var(--color-title);
+        }
+        .final-cta-section .btn-cta-1:hover {
+            background-color: var(--color-primary-cta);
+            color: var(--color-white);
+            border-color: var(--color-white);
+        }
+        .final-cta-section .btn-cta-2 {
+            background-color: var(--color-primary-cta);
+            color: var(--color-white);
+            border-color: var(--color-white);
+        }
+        .final-cta-section .btn-cta-2:hover {
+            background-color: var(--color-white);
+            color: var(--color-primary-cta);
+            border-color: var(--color-white);
+        }
+        
+        .form-section {
+            padding: 120px 0;
+        }
+        .form-container {
+            background: var(--color-white);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .form-section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+        }
+        .form-content {
+            padding: 50px;
+        }
+        .form-content h2 {
+            text-align: left;
+        }
+        .form-content h2::after {
+            left: 0;
+            transform: translateX(0);
+        }
+        .form-section-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .form-control { 
+            margin-bottom: 20px; 
+            text-align: left;
+        }
+        .form-control label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--color-title);
+        }
+        .form-control input, .form-control textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-family: var(--font-main);
+        }
+        .form-control input.error, .form-control textarea.error {
+            border-color: var(--color-error);
+        }
+        .error-message {
+            color: var(--color-error);
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+        #form-status {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+        }
+        #form-status.success {
+            background-color: #dff0d8;
+            color: var(--color-success);
+            border: 1px solid var(--color-success);
+            display: block;
+        }
+        #form-status.error {
+            background-color: #f2dede;
+            color: var(--color-error);
+            border: 1px solid var(--color-error);
+            display: block;
+        }
+
+
+        /* --- FOOTER STYLES --- */
+        .main-footer {
+            background-color: var(--color-title);
+            color: #a9b3c6;
+            padding: 60px 0;
+            font-size: 0.9rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+        .footer-col h4 {
+            color: var(--color-white);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        .footer-col p, .footer-col a {
+            color: #a9b3c6;
+            text-decoration: none;
+            line-height: 2;
+        }
+        .footer-col a:hover { color: var(--color-primary-cta); }
+        .footer-col ul { list-style: none; }
+        .social-links { display: flex; gap: 15px; margin-top: 1rem; }
+        .social-links a svg { width: 24px; height: 24px; fill: #a9b3c6; transition: fill 0.3s ease; }
+        .social-links a:hover svg { fill: var(--color-primary-cta); }
+        
+        /* Estilo para el logo del footer - Mostrar versión blanca */
+        .main-footer .footer-col .logo img {
+            content: url('img/logo-white.svg'); /* Carga el logo blanco */
+            filter: none; /* Asegura que no haya filtros de color adicionales */
+        }
+
+        /* --- MEDIA QUERIES --- */
+        @media (max-width: 992px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            section { padding: 60px 0; }
+            
+            .nav-menu {
+                position: fixed; top: 70px; right: -100%; width: 80%; height: 100vh;
+                background-color: var(--color-title); flex-direction: column; align-items: flex-start;
+                padding: 40px; gap: 0; transition: right 0.4s ease-in-out;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            }
+            .nav-menu li { width: 100%; }
+            .nav-menu a {
+                padding: 15px 0;
+                width: 100%;
+            }
+            .nav-menu.active { right: 0; }
+            .nav-menu.active a { color: var(--color-white); }
+            .nav-menu.active a:hover { color: var(--color-primary-cta); }
+            
+            .nav-menu .dropdown {
+                padding-bottom: 0;
+                margin-bottom: 0;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+            }
+            .nav-menu .dropdown a:not(.dropdown-content a) {
+                width: 100%;
+            }
+            .nav-menu .dropdown-content {
+                position: static;
+                display: none;
+                width: 100%;
+                box-shadow: none;
+                background-color: rgba(255,255,255,0.05);
+                padding: 0;
+                border-radius: 0;
+                margin-top: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease-in-out;
+            }
+            .nav-menu .dropdown-content.submenu-open {
+                display: block;
+                max-height: 500px;
+            }
+            .dropdown-content a {
+                padding: 12px 20px;
+                color: var(--color-white);
+            }
+            .nav-menu.active .dropdown .arrow { border-color: var(--color-white); }
+            .nav-menu.active .dropdown.open > a .arrow {
+                transform: rotate(225deg);
+            }
+            .nav-menu.active .dropdown a:hover .arrow { border-color: var(--color-primary-cta); }
+            .hamburger { display: block; }
+            .hamburger.active span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+            
+            .service-list-grid { 
+                grid-template-columns: 1fr 1fr;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .why-us-list { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .form-section-grid { grid-template-columns: 1fr; }
+            .form-section-grid img { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            .service-list-grid { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 480px) {
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="main-header" id="mainHeader">
+        <div class="container navbar">
+            <a href="index.html" class="logo">
+                <img src="img/logo.svg" alt="Logo de QuieroMiAbogado">
+            </a>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="como-funciona.html">Cómo funciona</a></li>
+                    <li class="dropdown">
+                        <a href="servicios.html" id="services-toggle" class="active-link">Servicios <span class="arrow"></span></a>
+                        <div class="dropdown-content">
+                            <a href="derecho-familiar.html">Derecho Familiar</a>
+                            <a href="derecho-inmobiliario.html">Derecho Inmobiliario</a>
+                            <a href="derecho-laboral.html">Derecho Laboral</a>
+                        </div>
+                    </li>
+                    <li><a href="quienes-somos.html">Quiénes somos</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="agendar-reunion.html" class="btn btn-primary">Agendar Reunión</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="service-hero">
+            <div class="container">
+                <h2>DERECHO INMOBILIARIO</h2>
+                <p>Protege tus derechos en contratos, arriendos y propiedades con la asesoría de abogados especialistas en derecho inmobiliario.</p>
+                <div class="hero-buttons">
+                    <a href="#listado-servicios" class="btn btn-primary">Conoce nuestros servicios inmobiliarios</a>
+                    <a href="agendar-reunion.html" class="btn btn-secondary">Agendar reunión</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="intro-section">
+            <div class="container">
+                <h3>Los <strong class="highlight">conflictos inmobiliarios</strong> pueden afectar tu <strong class="highlight">patrimonio y tranquilidad</strong>. En Quiero Mi Abogado te asesoramos en contratos, promesas de compraventa, arriendos y regularización de propiedades, con un proceso <strong class="highlight">claro y 100% online.</strong></h3>
+            </div>
+        </section>
+
+        <section id="listado-servicios" class="service-list-section">
+            <div class="container">
+                <h2>NUESTROS SERVICIOS LEGALES INMOBILIARIOS</h2>
+                <div class="service-list-grid">
+                    <div class="service-list-item"><a href="#promesa"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><path d="m11.5 16.5 3-3-3-3"/></svg>Promesa de compraventa</a></div>
+                    <div class="service-list-item"><a href="#juicio-arriendo"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/><path d="m16 9-2.3 2.3a1 1 0 0 1-1.4 0L10 9"/></svg>Juicio de arrendamiento</a></div>
+                    <div class="service-list-item"><a href="#contrato-arriendo"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><path d="M10.4 12.6a2 2 0 1 1 3.2 0l-3.2 4.4a2 2 0 1 0 3.2 0l3.2-4.4a2 2 0 1 1-3.2 0"/></svg>Contratos de arriendo</a></div>
+                    <div class="service-list-item"><a href="#redaccion"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Redacción de contratos</a></div>
+                    <div class="service-list-item"><a href="#regularizacion"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/><path d="m16 14-4 4 2 2"/></svg>Regularización de propiedades</a></div>
+                </div>
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="agendar-reunion.html" class="btn btn-primary">Agendar asesoría inmobiliaria</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="detalle-servicios">
+            <div class="container">
+                <div id="promesa" class="service-detail-block">
+                    <div class="service-detail-content">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="service-detail-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><path d="m11.5 16.5 3-3-3-3"/></svg>
+                        <div class="service-detail-text">
+                            <h3>Promesa de compraventa</h3>
+                            <p>La promesa de compraventa es un contrato previo que obliga a las partes a concretar la venta. Te asesoramos en su redacción, revisión y ejecución para evitar incumplimientos o cláusulas abusivas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="juicio-arriendo" class="service-detail-block">
+                    <div class="service-detail-content">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="service-detail-icon"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/><path d="m16 9-2.3 2.3a1 1 0 0 1-1.4 0L10 9"/></svg>
+                        <div class="service-detail-text">
+                            <h3>Juicio de arrendamiento</h3>
+                            <p>Cuando el arrendador o arrendatario incumple, se puede demandar el pago de rentas o la restitución del inmueble. Te representamos en juicios de arrendamiento para resguardar tus derechos.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="contrato-arriendo" class="service-detail-block">
+                     <div class="service-detail-content">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="service-detail-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><path d="M10.4 12.6a2 2 0 1 1 3.2 0l-3.2 4.4a2 2 0 1 0 3.2 0l3.2-4.4a2 2 0 1 1-3.2 0"/></svg>
+                        <div class="service-detail-text">
+                            <h3>Contratos de arriendo</h3>
+                            <p>Un contrato de arriendo mal redactado puede generar conflictos y pérdidas económicas. Elaboramos o revisamos contratos claros y ajustados a la ley, para arrendadores e inquilinos.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="redaccion" class="service-detail-block">
+                     <div class="service-detail-content">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="service-detail-icon"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                        <div class="service-detail-text">
+                            <h3>Redacción de contratos inmobiliarios</h3>
+                            <p>Más allá del arriendo, existen múltiples contratos en materia inmobiliaria (cesiones, comodatos, promesas). Te ayudamos a redactar documentos seguros que resguarden tus intereses.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="regularizacion" class="service-detail-block">
+                     <div class="service-detail-content">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="service-detail-icon"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/><path d="m16 14-4 4 2 2"/></svg>
+                        <div class="service-detail-text">
+                            <h3>Regularización de propiedades</h3>
+                            <p>La regularización de propiedades permite acreditar el dominio y asegurar la inscripción en el Conservador de Bienes Raíces. Te acompañamos en este trámite para dar certeza legal a tu inmueble.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-end-cta">
+                     <a href="agendar-reunion.html" class="btn btn-primary">Agendar asesoría inmobiliaria</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="why-us-section">
+            <div class="container">
+                <h2>¿POR QUÉ ELEGIRNOS EN DERECHO INMOBILIARIO?</h2>
+                <ul class="why-us-list">
+                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg> Experiencia en contratos y litigios inmobiliarios.</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg> Prevención de riesgos legales en compraventas y arriendos.</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg> Acompañamiento en regularización de propiedades.</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg> Transparencia y rapidez en procesos.</li>
+                </ul>
+                <div style="text-align: center;">
+                    <a href="agendar-reunion.html" class="btn btn-primary">Agendar reunión</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="final-cta-section">
+            <div class="container">
+                <h2>PROTEGE TU PATRIMONIO INMOBILIARIO HOY MISMO</h2>
+                <div class="trust-seals">
+                    <div class="seal">✓ Pago seguro</div>
+                    <div class="seal">✓ Abogados colegiados</div>
+                    <div class="seal">✓ Servicio 100% online</div>
+                </div>
+                <p>Agenda en simples pasos y recibe asesoría clara y especializada.</p>
+                <div style="margin-top: 2rem; display:flex; justify-content:center; gap: 15px; flex-wrap:wrap;">
+                    <a href="agendar-reunion.html" class="btn btn-cta-1">Agendar reunión ahora</a>
+                    <a href="#formulario-inmobiliario" class="btn btn-cta-2">Contáctanos</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="formulario-inmobiliario" class="container form-section">
+            <div class="form-container">
+                <div class="form-section-grid">
+                    <div class="form-content">
+                        <h2>¿DUDAS SOBRE TU CASO INMOBILIARIO?</h2>
+                        <p>Si necesitas orientación sobre tu caso de derecho inmobiliario, escríbenos y te contactaremos a la brevedad.</p>
+                        <form id="contactForm" style="margin-top:2rem;" novalidate>
+                            <input type="hidden" name="asunto" value="Derecho Inmobiliario">
+                            <div id="form-status"></div>
+                            <div class="form-control">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
+                                <div class="error-message" id="nombreError">El nombre es obligatorio.</div>
+                            </div>
+                            <div class="form-control">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                                <div class="error-message" id="emailError">Ingresa un email válido.</div>
+                            </div>
+                            <div class="form-control">
+                                <label for="telefono">Teléfono</label>
+                                <input type="tel" id="telefono" name="telefono" placeholder="+56 9 1234 5678">
+                            </div>
+                            <div class="form-control">
+                                <label for="consulta">Tu consulta breve</label>
+                                <textarea id="consulta" name="consulta" rows="4" placeholder="Cuéntanos brevemente sobre tu situación legal..." required></textarea>
+                                <div class="error-message" id="consultaError">La consulta es obligatoria.</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar consulta</button>
+                        </form>
+                    </div>
+                    <img src="img/form-imagen-inmobiliario.webp" alt="Propiedades y documentos legales">
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <a href="index.html" class="logo">
+                     <img src="img/logo-white.svg" alt="Logo de QuieroMiAbogado">
+                </a>
+                <p style="margin-top:1rem;">Tu plataforma de asesoría legal online en Chile.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Enlaces</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
+                    <li><a href="como-funciona.html">Cómo funciona</a></li>
+                    <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legales</h4>
+                 <ul>
+                    <li><a href="/politica-de-privacidad.pdf" target="_blank">Política de Privacidad</a></li>
+                    <li><a href="/terminos-y-condiciones.pdf" target="_blank">Términos y Condiciones</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <p>
+                    <a href="mailto:contacto@quieromiabogado.cl">contacto@quieromiabogado.cl</a><br>
+                    <a href="tel:+56912345678">+56 9 1234 5678</a>
+                </p>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.645-.07-4.85s.012-3.584.07-4.85c.148-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"/></svg></a>
+                    <a href="#" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Mobile Dropdown Logic
+        const servicesToggle = document.getElementById('services-toggle');
+        servicesToggle.addEventListener('click', function(e) {
+            if (window.innerWidth <= 992) {
+                e.preventDefault();
+                const dropdown = this.parentElement;
+                const submenu = dropdown.querySelector('.dropdown-content');
+                
+                dropdown.classList.toggle('open');
+                submenu.classList.toggle('submenu-open');
+            }
+        });
+        
+        // Form Validation Logic
+        const form = document.getElementById('contactForm');
+        if (form) {
+            const formStatus = document.getElementById('form-status');
+            const nombre = document.getElementById('nombre');
+            const email = document.getElementById('email');
+            const consulta = document.getElementById('consulta');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = validateForm();
+                if (isValid) {
+                    formStatus.className = 'success';
+                    formStatus.textContent = '¡Gracias! Hemos recibido tu consulta sobre Derecho Inmobiliario. Te contactaremos a la brevedad.';
+                    form.reset();
+                } else {
+                     formStatus.className = 'error';
+                     formStatus.textContent = 'Por favor, corrige los errores antes de enviar.';
+                }
+            });
+
+            function validateForm() {
+                let valid = true;
+                document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.form-control input, .form-control textarea').forEach(el => el.classList.remove('error'));
+                
+                if (nombre.value.trim() === '') {
+                    showError('nombreError', nombre);
+                    valid = false;
+                }
+                if (!isValidEmail(email.value)) {
+                    showError('emailError', email);
+                    valid = false;
+                }
+                if (consulta.value.trim() === '') {
+                    showError('consultaError', consulta);
+                    valid = false;
+                }
+                return valid;
+            }
+
+            function showError(errorId, inputElement) {
+                document.getElementById(errorId).style.display = 'block';
+                inputElement.classList.add('error');
+            }
+
+            function isValidEmail(email) {
+                const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            }
+        }
+    });
+    </script>
+
+</body>
+</html>
