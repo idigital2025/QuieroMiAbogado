@@ -57,7 +57,6 @@
             margin-bottom: 2.5rem;
             text-transform: uppercase;
         }
-        /* Línea decorativa para títulos H2 */
         h2::after {
             content: '';
             position: absolute;
@@ -151,7 +150,6 @@
         .nav-menu a:hover {
             color: var(--color-primary-cta);
         }
-        /* Estilo para el enlace de la página activa */
         .nav-menu a.active-link {
             color: var(--color-primary-cta);
             font-weight: 700;
@@ -219,9 +217,21 @@
         /* --- ESTILOS PÁGINA QUIÉNES SOMOS --- */
         .page-hero {
             padding: 180px 0 120px;
-            background-color: var(--color-title);
             text-align: center;
             color: var(--color-white);
+            background-color: var(--color-title);
+            background-image: url('img/hero-quienes-desktop.webp');
+            background-size: cover;
+            background-position: center center;
+            position: relative;
+            z-index: 1;
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(44, 55, 86, 0.7);
+            z-index: -1;
         }
         .page-hero h2 {
             color: var(--color-white);
@@ -257,14 +267,18 @@
         
         .bg-image-section {
             position: relative;
-            background: url('img/compromiso-bg.webp') no-repeat center center/cover;
             color: var(--color-white);
+            background-color: var(--color-title);
+            background-image: url('img/nuestro-compromiso-desktop.webp');
+            background-size: cover;
+            background-position: center center;
+            z-index: 1;
         }
         .bg-image-section .section-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(44, 55, 86, 0.85);
-            z-index: 1;
+            z-index: -1;
         }
         .bg-image-section .container {
             position: relative;
@@ -371,53 +385,6 @@
             border-color: var(--color-white);
         }
         
-        .form-section {
-            padding: 120px 0;
-        }
-        .form-container {
-            background: var(--color-white);
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            overflow: hidden;
-        }
-        .form-section-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-        }
-        .form-content {
-            padding: 50px;
-        }
-        .form-content h2 {
-            text-align: left;
-        }
-        .form-content h2::after {
-            left: 0;
-            transform: translateX(0);
-        }
-        .form-section-grid img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .form-control { 
-            margin-bottom: 20px; 
-            text-align: left;
-        }
-        .form-control label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--color-title);
-        }
-        .form-control input, .form-control textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-            font-family: var(--font-main);
-        }
-        
         /* --- FOOTER STYLES --- */
         .main-footer {
             background-color: var(--color-title);
@@ -445,11 +412,9 @@
         .social-links { display: flex; gap: 15px; margin-top: 1rem; }
         .social-links a svg { width: 24px; height: 24px; fill: #a9b3c6; transition: fill 0.3s ease; }
         .social-links a:hover svg { fill: var(--color-primary-cta); }
-
-        /* Estilo para el logo del footer - Mostrar versión blanca */
         .main-footer .footer-col .logo img {
-            content: url('img/logo-white.svg'); /* Carga el logo blanco */
-            filter: none; /* Asegura que no haya filtros de color adicionales */
+            content: url('img/logo-white.svg');
+            filter: none;
         }
 
         /* --- MEDIA QUERIES --- */
@@ -490,6 +455,16 @@
             .form-section-grid img { display: none; }
         }
 
+        @media (max-width: 768px) {
+            .page-hero {
+                background-image: url('img/hero-quienes-mobile.webp');
+                padding: 140px 0 100px;
+            }
+            .bg-image-section {
+                background-image: url('img/nuestro-compromiso-mobile.webp');
+            }
+        }
+
         @media (max-width: 480px) {
             .footer-grid { grid-template-columns: 1fr; }
             .values-grid { grid-template-columns: 1fr; }
@@ -502,7 +477,7 @@
     <header class="main-header" id="mainHeader">
         <div class="container navbar">
             <a href="index.html" class="logo">
-                <img src="img/logo.svg" alt="Logo de QuieroMiAbogado">
+                <img src="img/logo.svg" alt="QuieroMiAbogado Logo">
             </a>
             <nav>
                 <ul class="nav-menu" id="navMenu">
@@ -669,7 +644,8 @@
         <div class="container footer-grid">
             <div class="footer-col">
                 <a href="index.html" class="logo">
-                     <img src="img/logo-white.svg" alt="Logo de QuieroMiAbogado"> </a>
+                     <img src="img/logo-white.svg" alt="QuieroMiAbogado Logo Footer">
+                </a>
                 <p style="margin-top:1rem;">Tu plataforma de asesoría legal online en Chile.</p>
             </div>
             <div class="footer-col">
@@ -696,7 +672,7 @@
                     <a href="tel:+56912345678">+56 9 1234 5678</a>
                 </p>
                 <div class="social-links">
-                    <a href="#" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.645-.07-4.85s.012-3.584.07-4.85c.148-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zM12 10.162c-2.209 0-4 1.79-4 4s1.791 4 4 4 4-1.79 4-4-1.791-4-4-4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"/></svg></a>
+                    <a href="#" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.645-.07-4.85s.012-3.584.07-4.85c.148-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"/></svg></a>
                     <a href="#" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
                 </div>
             </div>

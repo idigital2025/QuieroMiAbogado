@@ -149,7 +149,6 @@
         .nav-menu a:hover {
             color: var(--color-primary-cta);
         }
-        /* Estilo para el enlace de la página activa */
         .nav-menu a.active-link {
             color: var(--color-primary-cta);
             font-weight: 700;
@@ -217,9 +216,25 @@
         /* --- ESTILOS DE PÁGINA DE SERVICIO --- */
         .service-hero {
             padding: 160px 0 100px;
-            background-color: var(--color-title);
             text-align: center;
             color: var(--color-white);
+            /* --- CÓDIGO NUEVO --- */
+            background-color: var(--color-title);
+            background-image: url('img/hero-familiar-desktop.webp');
+            background-size: cover;
+            background-position: center center;
+            position: relative;
+            z-index: 1;
+        }
+        .service-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(44, 55, 86, 0.7);
+            z-index: -1;
         }
         .service-hero h2 {
             color: var(--color-white);
@@ -488,7 +503,7 @@
         
         /* Estilo para el logo del footer - Mostrar versión blanca */
         .main-footer .footer-col .logo img {
-            content: url('img/logo-white.svg'); /* Carga el logo blanco */
+            content: url('img/logo-white.svg');
             filter: none;
         }
 
@@ -567,6 +582,10 @@
         }
 
         @media (max-width: 768px) {
+            .service-hero {
+                background-image: url('img/hero-familiar-mobile.webp');
+                padding: 140px 0 100px;
+            }
             .service-list-grid { grid-template-columns: 1fr; }
         }
         
