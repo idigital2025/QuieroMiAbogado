@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cómo Funciona - Quiero Mi Abogado</title>
     
-    <!-- Google Fonts: Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -56,7 +55,6 @@
             margin-bottom: 2.5rem;
             text-transform: uppercase;
         }
-        /* Línea decorativa para títulos H2 */
         h2::after {
             content: '';
             position: absolute;
@@ -150,6 +148,10 @@
         .nav-menu a:hover {
             color: var(--color-primary-cta);
         }
+        .nav-menu a.active-link {
+            color: var(--color-primary-cta);
+            font-weight: 700;
+        }
         .nav-menu .btn-primary {
             color: var(--color-white);
         }
@@ -213,9 +215,24 @@
         /* --- ESTILOS PÁGINA CÓMO FUNCIONA --- */
          .page-hero {
             padding: 180px 0 120px;
-            background-color: var(--color-title);
             text-align: center;
             color: var(--color-white);
+            background-color: var(--color-title);
+            background-image: url('img/hero-background.webp'); /* <-- CAMBIA ESTO POR TU IMAGEN */
+            background-size: cover;
+            background-position: center center;
+            position: relative; 
+            z-index: 1;
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(44, 55, 86, 0.7); /* Tono oscuro semitransparente */
+            z-index: -1;
         }
         .page-hero h2 {
             color: var(--color-white);
@@ -359,6 +376,10 @@
         .social-links { display: flex; gap: 15px; margin-top: 1rem; }
         .social-links a svg { width: 24px; height: 24px; fill: #a9b3c6; transition: fill 0.3s ease; }
         .social-links a:hover svg { fill: var(--color-primary-cta); }
+        .main-footer .footer-col .logo img {
+            content: url('img/logo-white.svg');
+            filter: none;
+        }
 
         @media (max-width: 992px) {
             h2 { font-size: 1.8rem; }
@@ -405,18 +426,18 @@
     <header class="main-header" id="mainHeader">
         <div class="container navbar">
             <a href="index.html" class="logo">
-                <img src="img/logo-header.webp" alt="QuieroMiAbogado Logo">
+                <img src="img/logo.svg" alt="QuieroMiAbogado Logo">
             </a>
             <nav>
                 <ul class="nav-menu" id="navMenu">
                     <li><a href="index.html">Inicio</a></li>
-                    <li><a href="como-funciona.html">Cómo funciona</a></li>
+                    <li><a href="como-funciona.html" class="active-link">Cómo funciona</a></li>
                     <li class="dropdown">
-                        <a href="index.html#servicios-home" id="services-toggle">Servicios <span class="arrow"></span></a>
+                        <a href="servicios.html" id="services-toggle">Servicios <span class="arrow"></span></a>
                         <div class="dropdown-content">
                             <a href="derecho-familiar.html">Derecho Familiar</a>
-                            <a href="derecho-laboral.html">Derecho Laboral</a>
                             <a href="derecho-inmobiliario.html">Derecho Inmobiliario</a>
+                            <a href="derecho-laboral.html">Derecho Laboral</a>
                         </div>
                     </li>
                     <li><a href="quienes-somos.html">Quiénes somos</a></li>
@@ -437,7 +458,7 @@
             <div class="container">
                 <h2>CÓMO FUNCIONA QUIERO MI ABOGADO</h2>
                 <h3>Un proceso claro, rápido y 100% online para resolver tu problema legal.</h3>
-                <a href="#intro" class="btn btn-primary">Quiero saber más</a>
+                <a href="agendar-reunion.html" class="btn btn-primary">Agendar mi reunión ahora</a>
             </div>
         </section>
 
@@ -543,7 +564,7 @@
         <div class="container footer-grid">
             <div class="footer-col">
                 <a href="index.html" class="logo">
-                     <img src="img/logo-footer-white.png" alt="QuieroMiAbogado Logo Footer">
+                     <img src="img/logo-white.svg" alt="QuieroMiAbogado Logo Footer">
                 </a>
                 <p style="margin-top:1rem;">Tu plataforma de asesoría legal online en Chile.</p>
             </div>
@@ -551,7 +572,7 @@
                 <h4>Enlaces</h4>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#servicios-home">Servicios</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
                     <li><a href="como-funciona.html">Cómo funciona</a></li>
                     <li><a href="quienes-somos.html">Quiénes Somos</a></li>
                     <li><a href="contacto.html">Contacto</a></li>
@@ -605,4 +626,3 @@
 
 </body>
 </html>
-
